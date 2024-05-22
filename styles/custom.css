@@ -191,7 +191,7 @@ li.inactive {
 }
 
 .indent {
-    margin-left: 1em;
+    padding-left: 2em;
 }
 
 .inline {
