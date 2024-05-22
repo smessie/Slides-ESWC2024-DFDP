@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DFDP: A Declarative Form Description Pipeline for Decentralizing Web Forms</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/themes/material/styles/styles.css">
+    <link rel="stylesheet" href="styles/custom.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'/>
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+    </style>
+
+    <link rel="foaf:maker" href="https://solid.smessie.com/profile/card#me"/>
+</head>
+<body class="shower list"
+      prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# foaf: http://xmlns.com/foaf/0.1/ owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# org: http://www.w3.org/ns/org# schema: http://schema.org/ cite: http://purl.org/spar/cito/"
+      typeof="schema:PresentationDigitalDocument">
+
+<header class="caption">
+    <h1 property="schema:name">DFDP: A Declarative Form Description Pipeline for Decentralizing Web Forms</h1>
+    <div class="captiondata">
+        <p class="author" rel="schema:author">
+            <a href="https://smessaert.be"><strong>Ieben Smessaert</strong></a>,
+            <a href="https://patrickhochstenbach.net">Patrick Hochstenbach</a>,
+            <a href="https://ben.de-meester.org/">Ben De Meester</a>,
+            <a href="https://www.rubensworks.net/#me">Ruben Taelman</a>,
+            <a href="https://ruben.verborgh.org">Ruben Verborgh</a>
+        </p>
+        <p class="venue">
+            <a href="https://dbis.rwth-aachen.de/SDS24/">SDS 2024</a>, <span
+                rel="schema:datePublished">26 May 2024</span>
+        </p>
+    </div>
+</header>
+
+<section id="title" class="slide title" inlist="" rel="schema:hasPart" resource="#title">
+    <h2 property="schema:name" style="font-size: 2.5em">DFDP: A Declarative Form Description Pipeline for Decentralizing
+        Web Forms</h2>
+    <ul class="author inline">
+        <li><a href="https://smessaert.be"><strong>Ieben Smessaert</strong></a></li>
+        <li><a href="https://patrickhochstenbach.net">Patrick Hochstenbach</a></li>
+        <li><a href="https://ben.de-meester.org/">Ben De Meester</a></li>
+        <li><a href="https://www.rubensworks.net/#me">Ruben Taelman</a></li>
+        <li><a href="https://ruben.verborgh.org">Ruben Verborgh</a></li>
+    </ul>
+    <p class="affiliation"><a href="https://idlab.technology/">Ghent University – imec – IDLab, Belgium</a></p>
+</section>
+
+<section id="intro" class="slide" inlist="" rel="schema:hasPart" resource="#intro">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">We use forms all the time</h2>
+    <ul>
+        <li style="margin-top: 70px;">Filling in shipping information during online order</li>
+        <li style="margin-top: 70px;">Submitting a support request</li>
+        <li style="margin-top: 70px;">Patient's medical data entry in a hospital</li>
+    </ul>
+</section>
+
+<section id="medical-data-entry" class="slide" inlist="" rel="schema:hasPart" resource="#medical-data-entry">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Forms are used for medical data entry</h2>
+    <h3>Health Data Space</h3>
+    <div class="columns three">
+        <div class="center">
+            <img src="img/kiosk.png" alt="Hospital display environment" style="height: 200px;"/>
+            <p>Kiosk</p>
+        </div>
+        <div class="center">
+            <img src="img/computer.svg" alt="Home display environment" style="height: 200px;"/>
+            <p>Doctor's computer</p>
+        </div>
+        <div class="center">
+            <img src="img/smartphone.svg" alt="Phone display environment" style="height: 200px;"/>
+            <p>Patient's smartphone</p>
+        </div>
+    </div>
+</section>
+
+<section id="display-specifics" class="slide" inlist="" rel="schema:hasPart" resource="#display-specifics">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Each environment can display the form
+        differently</h2>
+    <div class="columns three">
+        <div class="center">
+            <img src="img/kiosk.png" alt="Hospital display environment" style="height: 200px;"/>
+            <p>With big buttons</p>
+        </div>
+        <div class="center">
+            <img src="img/computer.svg" alt="Home display environment" style="height: 200px;"/>
+            <p>Optimized for quick data entry</p>
+        </div>
+        <div class="center">
+            <img src="img/smartphone.svg" alt="Phone display environment" style="height: 200px;"/>
+            <p>Extensive description of each field</p>
+        </div>
+    </div>
+</section>
+
+<section id="different-forms" class="slide" inlist="" rel="schema:hasPart" resource="#different-forms">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Different forms per environment</h2>
+    <ul>
+        <li>Requires custom implementation per environment for each form</li>
+    </ul>
+    <div class="center">
+        <img src="img/different-forms-per-environment.svg" alt="Different forms per environment illustration"
+             style="height: 350px;"/>
+    </div>
+</section>
+
+<section id="bad-interoperability-workflow-dependent" class="slide" inlist="" rel="schema:hasPart"
+         resource="#bad-interoperability-workflow-dependent">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Bad interoperability and workflow dependent</h2>
+    <div class="center">
+        <img src="img/bad-interoperability.svg" alt="Bad interoperability and workflow dependent illustration"
+             style="height: 350px;"/>
+    </div>
+</section>
+
+<section id="tightly-coupling" class="slide" inlist="" rel="schema:hasPart" resource="#tightly-coupling">
+    <h2 property="schema:name" class="big" style="margin-top: 20px; font-size: 2em;">Data is tightly coupled to the
+        application</h2>
+    <div class="center">
+        <img src="img/tightly-coupled.svg" alt="Data is tightly coupled to the application illustration"
+             style="height: 400px;"/>
+    </div>
+</section>
+
+
+<section id="declarative-form-description" class="slide" inlist="" rel="schema:hasPart"
+         resource="#declarative-form-description">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Declarative Form Description</h2>
+    <ul>
+        <li>Display</li>
+        <li class="indent">Semantic description of the form fields</li>
+        <li>Shape</li>
+        <li class="indent">Structure of the data</li>
+        <li>Footprints</li>
+        <li class="indent">Semantic description of the associated actions</li>
+    </ul>
+</section>
+
+<section id="pipeline" class="slide" inlist="" rel="schema:hasPart" resource="#pipeline">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">The pipeline</h2>
+    <img class="hide" src="img/DFDP-full.svg" alt="DFDP form generator app"
+         style="height: 326px; position: absolute; right: 30px; z-index: 5;"/>
+
+    <img class="next" src="img/DFDP-generator-app.svg" alt="DFDP form generator app"
+         style="height: 130px; position: absolute; right: 30px; margin-top: 45px;"/>
+    <img class="next" src="img/DFDP-input.svg" alt="DFDP input"
+         style="height: 223px; position: absolute; right: 227px; z-index: 5;"/>
+    <img class="next" src="img/DFDP-renderer-app.svg" alt="DFDP renderer app"
+         style="height: 202px; position: absolute; right: 388px; margin-top: 25px; z-index: 4;"/>
+    <img class="next" src="img/DFDP-declarative-app.svg" alt="DFDP declarative generated app"
+         style="height: 129px; position: absolute; right: 688px; margin-top: 50px; z-index: 3;"/>
+    <img class="next" src="img/DFDP-output.svg" alt="DFDP output"
+         style="height: 157px; position: absolute; right: 720px; margin-top: 171px; z-index: 2;"/>
+</section>
+
+<section id="index" class="slide index" inlist="" rel="schema:hasPart" resource="#index">
+    <ul>
+        <li><a href="#display">Multiple Viewing Environments</a></li>
+        <li><a href="#schema-alignment">Schema Alignment Tasks</a></li>
+        <li><a href="#footprints">Footprint Tasks</a></li>
+        <li><a href="#index-use-case">Use Case: Health Data Space</a></li>
+    </ul>
+</section>
+
+<section id="display" class="slide" inlist="" rel="schema:hasPart" resource="#display">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">The display description semantically describes the
+        form</h2>
+    <ul>
+        <li>Using RDF</li>
+        <li class="indent">SHACL, UI ontology, RDF-Form, ...</li>
+        <li style="margin-top: 60px;">Display not tied to the rendering environment</li>
+        <li style="margin-top: 60px;">Machine interpretability</li>
+    </ul>
+</section>
+
+<section id="any-environment" class="slide" inlist="" rel="schema:hasPart" resource="#any-environment">
+    <h2 property="schema:name" class="big" style="margin-top: 10px">Same form description can be rendered in any
+        environment</h2>
+    <div class="columns two">
+        <div class="center">
+            <img src="img/FormRenderer.png" alt="Form renderer" style="height: 250px;"/>
+            <h3 style="margin-top: 0; margin-bottom: 0;">FormRenderer</h3>
+            <p>Using HTML in the browser</p>
+        </div>
+        <div class="center">
+            <img src="img/FormCli.png" alt="Form CLI" style="height: 250px;"/>
+            <h3 style="margin-top: 0; margin-bottom: 0;">FormCli</h3>
+            <p>Text-based via the command-line</p>
+        </div>
+    </div>
+</section>
+
+<section id="schema-alignment" class="slide" inlist="" rel="schema:hasPart" resource="#schema-alignment">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Schema alignment translates the form description
+        into an ontology</h2>
+    <div class="columns two">
+        <ul>
+            <li style="margin-top: 40px;">Treat definitions that semantically describe the same thing as identical</li>
+            <li style="margin-top: 60px;">Achieves a decoupled solution</li>
+        </ul>
+        <img src="img/schema-alignment.svg" alt="Schema alignment visualisation"
+             style="height: 350px; position: absolute; right: 100px; bottom: 25px;"/>
+    </div>
+</section>
+
+<section id="footprints" class="slide" inlist="" rel="schema:hasPart" resource="#footprints">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Footprints completes the fully declarative form</h2>
+    <div class="columns two">
+        <ul>
+            <li style="margin-top: 40px;">Removes data storage assumptions</li>
+            <li style="margin-top: 60px;">Semantically describes actions</li>
+        </ul>
+        <img src="img/footprints.svg" alt="Footprints visualisation"
+             style="height: 400px; position: absolute; right: 100px; bottom: 25px;"/>
+    </div>
+</section>
+
+<section id="index-use-case" class="slide index" inlist="" rel="schema:hasPart" resource="#index-use-case">
+    <ul>
+        <li><a href="#display">Multiple Viewing Environments</a></li>
+        <li><a href="#schema-alignment">Schema Alignment Tasks</a></li>
+        <li><a href="#footprints">Footprint Tasks</a></li>
+        <li class="current"><a href="#index-use-case">Use Case: Health Data Space</a></li>
+    </ul>
+</section>
+
+
+<section id="improved-interoperability-dfd" class="slide" inlist="" rel="schema:hasPart"
+         resource="#improved-interoperability-dfd">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Declarative form description improves
+        interoperability</h2>
+    <div class="center">
+        <img src="img/improved-interoperability-DFD.svg"
+             alt="Declarative form description improves interoperability illustration" style="height: 400px; margin-top: -60px;"/>
+    </div>
+</section>
+
+<section id="improved-interoperability-sa" class="slide" inlist="" rel="schema:hasPart"
+         resource="#improved-interoperability-sa">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Schema alignment improves interoperability</h2>
+    <div class="center">
+        <img src="img/improved-interoperability-SA.svg"
+             alt="Schema alignment improves interoperability illustration" style="height: 350px; margin-top: -30px;"/>
+    </div>
+</section>
+
+<section id="workflow-independent" class="slide" inlist="" rel="schema:hasPart" resource="#workflow-independent">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Viewing environments are now workflow
+        independent</h2>
+    <div class="center">
+        <img src="img/workflow-independent.svg" alt="Workflow independent illustration"
+             style="height: 350px; margin-top: -30px;"/>
+    </div>
+</section>
+
+<section id="footprints-decouple" class="slide" inlist="" rel="schema:hasPart" resource="#footprints-decouple">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Footprints decouple data from application</h2>
+    <div class="center">
+        <img src="img/footprints-decouple.svg" alt="Footprints decouple data from application illustration"
+             style="height: 300px;"/>
+    </div>
+</section>
+
+
+<section id="conclusion" class="slide" inlist="" rel="schema:hasPart" resource="#conclusion">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Conclusion</h2>
+    <ul>
+        <li style="margin-top: 60px;">Improved interoperability</li>
+        <li style="margin-top: 60px;">Workflow independent</li>
+        <li style="margin-top: 60px;">Data decoupled from application</li>
+    </ul>
+</section>
+
+<section id="one-step-further" class="slide" inlist="" rel="schema:hasPart" resource="#one-step-further">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">One step further</h2>
+    <ul>
+        <li style="margin-top: 60px;">Automatically suggesting bindings based on user-entered field names</li>
+        <li style="margin-top: 60px;">Embedding schema alignment between the application and data</li>
+    </ul>
+</section>
+
+<section id="questions" class="slide" inlist="" rel="schema:hasPart" resource="#questions">
+    <h2 property="schema:name" class="big" style="margin-top: 20px">Questions?</h2>
+    <h3>https://w3id.org/DFDP</h3>
+    <img src="img/DFDP-full.svg" alt="DFDP form generator app" style="height: 300px; position: absolute; right: 70px;"/>
+</section>
+
+
+<footer>
+    <p class="license">
+        &#169; <span property="schema:copyrightYear">2024</span> <a href="https://smessaert.be"
+                                                                    rel="schema:copyrightHolder"><span
+            resource="https://solid.smessie.com/profile/card#me">Ieben Smessaert</span></a>
+        — <a rel="license" href="https://creativecommons.org/licenses/by/4.0/" property="schema:license">Creative
+        Commons Attribution 4.0</a>, unless otherwise indicated.
+    </p>
+    <a href="https://github.com/smessie/Slides-ESWC2024-DFDP">Source</a>
+</footer>
+
+<script src="shower/shower.js"></script>
+<!-- Copyright © 2024 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
